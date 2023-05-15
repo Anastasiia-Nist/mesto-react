@@ -1,6 +1,6 @@
 # mesto-react
 ### *Учебный проект от [Яндекс.Практикум](https://practicum.yandex.ru/web/)*
-### **Интерактивный сайт о городах России на «React» ![React](https://commons.wikimedia.org/wiki/File:React-icon.svg)**
+### **Интерактивный сайт о городах России на «React» ![React](https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg)**
 ## Задачи проекта
 - Портирование веб-приложения на «Реакт»;
 - Создание функциональных компонентов;
