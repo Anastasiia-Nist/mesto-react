@@ -2,7 +2,9 @@ import React from "react";
 
 function ImagePopup(props) {
   return (
-    <section className={`popup popup-image ${props.card.name ? "popup_opened" : ""}`}>
+    <section
+      className={`popup popup-image ${props.card.name ? "popup_opened" : ""}`}
+    >
       <div className="popup-image__container">
         <figure className="popup-image__figure">
           <img

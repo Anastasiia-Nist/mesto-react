@@ -2,12 +2,13 @@ import React from "react";
 import avatarDefault from "../images/avatarCat.jpg";
 import pencilImg from "../images/pencil.svg";
 import api from "../utils/Api";
-import Card from "../components/Card"
-
+import Card from "../components/Card";
 
 function Main(props) {
   const [userName, setUserName] = React.useState("Жак-Ив-Куско");
-  const [userDescription, setUserDescription] = React.useState( "Исследователь океана");
+  const [userDescription, setUserDescription] = React.useState(
+    "Исследователь океана"
+  );
   const [userAvatar, setUserAvatar] = React.useState(avatarDefault);
   const [cards, setCards] = React.useState([]);
   React.useEffect(() => {
@@ -59,10 +60,10 @@ function Main(props) {
       </section>
       <section className="cards">
         {cards.map((card) => {
-                      return (
-                        <Card card={card} key={card._id} onCardClick={props.onCardClick}/>
-                      );
-                  })}
+          return (
+            <Card card={card} key={card._id} onCardClick={props.onCardClick} />
+          );
+        })}
       </section>
     </main>
   );

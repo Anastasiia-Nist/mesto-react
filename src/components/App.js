@@ -8,7 +8,6 @@ import ImagePopup from "./ImagePopup";
 //
 
 function App() {
-
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -28,7 +27,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setSelectedCard({})
+    setSelectedCard({});
   }
   function handleCardClick(card) {
     setSelectedCard(card);
@@ -46,7 +45,7 @@ function App() {
       <PopupWithForm
         name="avatar"
         title="Обновить аватар"
-        textButton="Сохранить"
+        buttonText="Сохранить"
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
       >
@@ -65,7 +64,7 @@ function App() {
       <PopupWithForm
         name="profile"
         title="Редактировать профиль"
-        textButton="Сохранить"
+        buttonText="Сохранить"
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
       >
@@ -96,7 +95,13 @@ function App() {
           <span className="form__input-error" id="about-error"></span>
         </div>
       </PopupWithForm>
-      <PopupWithForm name="cards" title="Новое место" textButton="Создать" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
+      <PopupWithForm
+        name="cards"
+        title="Новое место"
+        buttonText="Создать"
+        isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
+      >
         <div className="form__section">
           <input
             className="form__input form__input_card_name"
@@ -123,7 +128,6 @@ function App() {
         </div>
       </PopupWithForm>
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-      
     </div>
   );
 }

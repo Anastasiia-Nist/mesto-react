@@ -3,7 +3,7 @@ function Footer(props) {
   return (
     <footer className="footer">
       <p className="footer__copywriter">
-        &copy; 2022 Mesto Russia by Anastasia &#128506;
+        &copy; {new Date().getFullYear()} Mesto Russia by Anastasia &#128506;
       </p>
     </footer>
   );
