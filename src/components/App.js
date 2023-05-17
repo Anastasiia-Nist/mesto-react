@@ -33,7 +33,7 @@ function App() {
     setSelectedCard(card);
   }
   return (
-    <div className="page">
+    <React.Fragment>
       <Header src={logo} />
       <Main
         onEditProfile={handleEditProfileClick}
@@ -128,7 +128,7 @@ function App() {
         </div>
       </PopupWithForm>
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-    </div>
+    </React.Fragment>
   );
 }
 
