@@ -32,9 +32,12 @@ function App() {
   function handleCardClick(card) {
     setSelectedCard(card);
   }
+
+
+
   return (
     <React.Fragment>
-      <Header src={logo} />
+      <Header src={logo} alt="Логотип Место"/>
       <Main
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}

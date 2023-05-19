@@ -1,23 +1,23 @@
-function Card(props) {
+function Card({card, onCardClick}) {
   function handleClick() {
-    props.onCardClick(props.card);
+    onCardClick(card);
   }
   return (
     <article className="card">
       <img
         className="card__img"
-        src={props.card.link}
-        alt={props.card.name}
+        src={card.link}
+        alt={card.name}
         onClick={handleClick}
       />
       <div className="card__info">
-        <h2 className="card__name">{props.card.name}</h2>
+        <h2 className="card__name">{card.name}</h2>
         <div className="card__like-container">
           <button
             className="card__button-like"
             aria-label="Кнопка лайка карточки"
           ></button>
-          <p className="card__button-like-counter">{props.card.likes.length}</p>
+          <p className="card__button-like-counter">{card.likes.length}</p>
         </div>
       </div>
       <button
