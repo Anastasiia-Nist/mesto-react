@@ -47,7 +47,7 @@ export function EditProfilePopup({ isOpen, onClose, onUpdateUser, onLoading }) {
           minLength="2"
           maxLength="40"
           placeholder="Имя"
-          value={name}
+          value={name || ""}
           onChange={handleChangeName}
         />
         <span className="form__input-error" id="name-error"></span>
@@ -62,7 +62,7 @@ export function EditProfilePopup({ isOpen, onClose, onUpdateUser, onLoading }) {
           minLength="2"
           maxLength="200"
           placeholder="О себе"
-          value={description}
+          value={description || ""}
           onChange={handleChangeDescription}
         />
         <span className="form__input-error" id="about-error"></span>

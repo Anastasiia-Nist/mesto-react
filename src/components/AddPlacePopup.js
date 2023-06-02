@@ -42,7 +42,7 @@ export function AddPlacePopup({ isOpen, onClose, onAddPlace, onLoading }) {
           minLength="2"
           maxLength="30"
           placeholder="Название"
-          ref={newCardNameRef}
+          ref={newCardNameRef || ""}
           onChange={handleChangeName}
         />
         <span className="form__input-error" id="place-error"></span>
