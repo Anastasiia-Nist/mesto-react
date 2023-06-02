@@ -7,7 +7,9 @@ export class Api {
   }
   //
   _request(endpoint, options) {
-    return fetch(`${this._baseUrl}${endpoint}`, options).then(this._checkResult)
+    return fetch(`${this._baseUrl}${endpoint}`, options).then(
+      this._checkResult
+    );
   }
 
   _checkResult(res) {
@@ -19,11 +21,11 @@ export class Api {
 
   //загружаем информацию о юзере с сервера
   getUserInfo() {
-    return this._request(`users/me/`, {headers: this._headers});
+    return this._request(`users/me/`, { headers: this._headers });
   }
   //загружаем карточки с сервера
   getInitialCards() {
-    return this._request(`cards/`, {headers: this._headers});
+    return this._request(`cards/`, { headers: this._headers });
   }
   // отправляем данные юзера на сервер
   patchUserInfo(data) {
@@ -71,15 +73,30 @@ export class Api {
     });
   }
   // добавление аватара
-  patchUserAvatar(item) {
+  patchUserAvatar(avatar) {
     return this._request(`users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: item.link,
+        avatar,
       }),
     });
   }
+
+  changeLikeCardStatus(_id, isLiked) {
+    if (isLiked) {
+      return this._request(`/cards/${_id}/likes`, {
+        method: "PUT",
+        headers: this._headers,
+      });
+    } else {
+      return this._request(`/cards/${_id}/likes`, {
+        method: "DELETE",
+        headers: this._headers,
+      });
+    }
+  }
 }
+
 const api = new Api(dataApi);
 export default api;

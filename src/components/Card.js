@@ -1,6 +1,25 @@
-function Card({card, onCardClick}) {
+import React, { useContext } from "react";
+import { CurrentUserContext } from "../context/CurrentUserContext";
+
+function Card({ card, onCardClick, onCardLike, onCardDelete }) {
+  const currentUser = useContext(CurrentUserContext);
+  const isOwn = card.owner._id === currentUser._id;
+  const isLiked = card.likes.some((i) => i._id === currentUser._id);
+  const cardLikeButtonClassName = `card__button-like ${
+    isLiked && "card__button-like_active"
+  }`;
+  const cardDeleteButtonClassName = `card__button-trash ${
+    isOwn && "card__button-trash_active"
+  }`;
+
   function handleClick() {
     onCardClick(card);
+  }
+  function handleLikeClick() {
+    onCardLike(card);
+  }
+  function handleDeleteClick() {
+    onCardDelete(card);
   }
   return (
     <article className="card">
@@ -14,16 +33,20 @@ function Card({card, onCardClick}) {
         <h2 className="card__name">{card.name}</h2>
         <div className="card__like-container">
           <button
-            className="card__button-like"
+            className={cardLikeButtonClassName}
+            onClick={handleLikeClick}
             aria-label="Кнопка лайка карточки"
           ></button>
           <p className="card__button-like-counter">{card.likes.length}</p>
         </div>
       </div>
-      <button
-        className="card__button-trash"
-        aria-label="Кнопка удаления карточки"
-      ></button>
+      {isOwn && (
+        <button
+          className={cardDeleteButtonClassName}
+          onClick={handleDeleteClick}
+          aria-label="Кнопка удаления карточки"
+        />
+      )}
     </article>
   );
 }
