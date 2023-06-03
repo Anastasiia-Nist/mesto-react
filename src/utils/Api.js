@@ -1,4 +1,11 @@
-import { dataApi } from "./constants";
+// API
+const dataApi = {
+  baseUrl: "https://nomoreparties.co/v1/cohort-64/",
+  headers: {
+      authorization: "3bc753b1-d1b4-4fd5-b226-ffa03d509b4a",
+      "Content-Type": "application/json",
+    },
+};
 
 export class Api {
   constructor(dataApi) {
