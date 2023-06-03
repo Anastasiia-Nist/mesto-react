@@ -1,3 +1,5 @@
+//import { useEffect } from "react";
+import React from "react";
 function PopupWithForm({
   isOpen,
   onClose,
@@ -7,6 +9,13 @@ function PopupWithForm({
   children,
   onSubmit,
 }) {
+
+  React.useEffect(() => {
+    setIsValid(formRef.current.checkValidity());
+  }, [children]);
+  const [isValid, setIsValid] = React.useState(false);
+  const formRef = React.useRef();
+
   return (
     <section
       className={`popup popup-${name} 
@@ -19,9 +28,9 @@ function PopupWithForm({
           onClick={onClose}
         />
         <h2 className="popup__title">{title} </h2>
-        <form className="form" name={`${name}Form`} onSubmit={onSubmit}>
+        <form className="form" name={`${name}Form`} onSubmit={onSubmit} ref={formRef}>
           {children}
-          <button className="button-save" type="submit">
+          <button disabled={!isValid} className="button-save" type="submit">
             {buttonText}
           </button>
         </form>

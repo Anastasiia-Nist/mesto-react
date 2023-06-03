@@ -7,19 +7,42 @@ export function EditProfilePopup({ isOpen, onClose, onUpdateUser, onLoading }) {
   const [name, setName] = React.useState("");
   const [description, setDescription] = React.useState("");
 
+  // валидация
+  const [nameInputErrorMessage, setNameInputErrorMessage] = React.useState("");
+  const [aboutInputErrorMessage, setAboutInputErrorMessage] = React.useState("");
+  
+  function hiddenError() {
+    setNameInputErrorMessage("");
+    setAboutInputErrorMessage("");
+  }
+
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
+    hiddenError();
   }, [currentUser, isOpen]);
+
+  
 
   function handleChangeName(e) {
     setName(e.target.value);
+    //валидация
+    if (e.target.value.length < 2) {
+      setNameInputErrorMessage(e.target.validationMessage);
+    } else {
+      setNameInputErrorMessage("");
+    }
   }
 
   function handleChangeDescription(e) {
     setDescription(e.target.value);
+    //валидация
+    if (e.target.value.length < 2) {
+      setAboutInputErrorMessage(e.target.validationMessage);
+    } else {
+      setAboutInputErrorMessage("");
+    }
   }
-
   function handleSubmit(e) {
     e.preventDefault();
     onUpdateUser({
@@ -32,14 +55,14 @@ export function EditProfilePopup({ isOpen, onClose, onUpdateUser, onLoading }) {
     <PopupWithForm
       name="profile"
       title="Редактировать профиль"
-      buttonText={onLoading? 'Сохранение...' : 'Сохранить'}
+      buttonText={onLoading ? "Сохранение..." : "Сохранить"}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
     >
       <div className="form__section">
         <input
-          className="form__input form__input_type_name"
+          className={`form__input form__input_type_name ${nameInputErrorMessage && "form__input_invalid"}`}
           id="name"
           type="text"
           name="name"
@@ -50,11 +73,15 @@ export function EditProfilePopup({ isOpen, onClose, onUpdateUser, onLoading }) {
           value={name}
           onChange={handleChangeName}
         />
-        <span className="form__input-error" id="name-error"></span>
+        {nameInputErrorMessage && (
+          <span className="form__input-error_active" id="name-error">
+            {nameInputErrorMessage}
+          </span>
+        )}
       </div>
       <div className="form__section">
         <input
-          className="form__input form__input_type_career"
+          className={`form__input form__input_type_career ${aboutInputErrorMessage && "form__input_invalid"}`}
           id="about"
           type="text"
           name="about"
@@ -65,7 +92,11 @@ export function EditProfilePopup({ isOpen, onClose, onUpdateUser, onLoading }) {
           value={description}
           onChange={handleChangeDescription}
         />
-        <span className="form__input-error" id="about-error"></span>
+        {aboutInputErrorMessage && (
+          <span className="form__input-error_active" id="about-error">
+            {aboutInputErrorMessage}
+          </span>
+        )}
       </div>
     </PopupWithForm>
   );

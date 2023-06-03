@@ -4,17 +4,40 @@ import PopupWithForm from "./PopupWithForm";
 export function AddPlacePopup({ isOpen, onClose, onAddPlace, onLoading }) {
   const [name, setName] = React.useState("");
   const [link, setLink] = React.useState("");
+
+   // валидация
+   const [nameInputErrorMessage, setNameInputErrorMessage] = React.useState("");
+   const [linkInputErrorMessage, setLinkInputErrorMessage] = React.useState("");
+
+   function hiddenError() {
+    setNameInputErrorMessage("");
+    setLinkInputErrorMessage("");
+  }
+
   React.useEffect(() => {
     setName("");
     setLink("");
+    hiddenError();
   }, [isOpen]);
 
   function handleChangeName(e) {
     setName(e.target.value);
+    //валидация
+    if (e.target.value.length < 2) {
+      setNameInputErrorMessage(e.target.validationMessage);
+    } else {
+      setNameInputErrorMessage("");
+    }
   }
 
   function handleChangeLink(e) {
     setLink(e.target.value);
+    //валидация
+    if (e.target.typeof !== "url") {
+      setLinkInputErrorMessage(e.target.validationMessage);
+    } else {
+      setLinkInputErrorMessage("");
+    }
   }
   function handleSubmit(e) {
     e.preventDefault();
@@ -34,7 +57,7 @@ export function AddPlacePopup({ isOpen, onClose, onAddPlace, onLoading }) {
     >
       <div className="form__section">
         <input
-          className="form__input form__input_card_name"
+          className={`form__input form__input_card_name ${nameInputErrorMessage && "form__input_invalid"}`}
           id="place"
           type="text"
           name="name"
@@ -45,11 +68,15 @@ export function AddPlacePopup({ isOpen, onClose, onAddPlace, onLoading }) {
           value={name}
           onChange={handleChangeName}
         />
-        <span className="form__input-error" id="place-error"></span>
+        {nameInputErrorMessage && (
+          <span className="form__input-error_active" id="place-error">
+            {nameInputErrorMessage}
+          </span>
+        )}
       </div>
       <div className="form__section">
         <input
-          className="form__input form__input_card_img"
+          className={`form__input form__input_card_img ${linkInputErrorMessage && "form__input_invalid"}`}
           id="place__link"
           type="url"
           name="link"
@@ -58,7 +85,11 @@ export function AddPlacePopup({ isOpen, onClose, onAddPlace, onLoading }) {
           value={link}
           onChange={handleChangeLink}
         />
-        <span className="form__input-error" id="place__link-error"></span>
+        {linkInputErrorMessage && (
+          <span className="form__input-error_active" id="place__link-error">
+            {linkInputErrorMessage}
+          </span>
+        )}
       </div>
     </PopupWithForm>
   );
