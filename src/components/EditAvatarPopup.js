@@ -1,17 +1,23 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
-export function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, onLoading }) {
+
+export function EditAvatarPopup({
+  isOpen,
+  onClose,
+  onUpdateAvatar,
+  onLoading,
+}) {
   //const avatarRef = React.useRef();
   const [link, setLink] = React.useState("");
-  const [linkInputErrorMessage, setLinkInputErrorMessage] = React.useState("");
+  const [linkErrorMessage, setLinkErrorMessage] = React.useState("");
 
   React.useEffect(() => {
     setLink("");
-    setLinkInputErrorMessage("");
+    setLinkErrorMessage("");
   }, [isOpen]);
-  
+
   //валидация
-  
+
   function handleSubmit(e) {
     e.preventDefault();
     onUpdateAvatar({
@@ -22,9 +28,9 @@ export function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, onLoading }) 
     setLink(e.target.value);
     //валидация
     if (e.target.typeof !== "url") {
-      setLinkInputErrorMessage(e.target.validationMessage);
+      setLinkErrorMessage(e.target.validationMessage);
     } else {
-      setLinkInputErrorMessage("");
+      setLinkErrorMessage("");
     }
   }
 
@@ -32,7 +38,7 @@ export function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, onLoading }) 
     <PopupWithForm
       name="avatar"
       title="Обновить аватар"
-      buttonText={onLoading? 'Сохранение...' : 'Сохранить'}
+      buttonText={onLoading ? "Сохранение..." : "Сохранить"}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
@@ -48,9 +54,9 @@ export function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, onLoading }) 
           value={link}
           onChange={handleChangeLink}
         />
-        {linkInputErrorMessage && (
+        {linkErrorMessage && (
           <span className="form__input-error_active" id="avatar-error">
-            {linkInputErrorMessage}
+            {linkErrorMessage}
           </span>
         )}
       </div>

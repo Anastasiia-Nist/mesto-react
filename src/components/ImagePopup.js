@@ -1,6 +1,8 @@
 import React from "react";
+import {usePopupClose} from "./usePopupClose";
 
 function ImagePopup({card, onClose}) {
+  usePopupClose(card.link, onClose);
   return (
     <section
       className={`popup popup-image ${card.name ? "popup_opened" : ""}`}
@@ -20,7 +22,6 @@ function ImagePopup({card, onClose}) {
           className="popup__button-close"
           type="button"
           aria-label="Кнопка закрытия"
-          onClick={onClose}
         ></button>
       </div>
     </section>

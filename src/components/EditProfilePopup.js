@@ -8,29 +8,23 @@ export function EditProfilePopup({ isOpen, onClose, onUpdateUser, onLoading }) {
   const [description, setDescription] = React.useState("");
 
   // валидация
-  const [nameInputErrorMessage, setNameInputErrorMessage] = React.useState("");
-  const [aboutInputErrorMessage, setAboutInputErrorMessage] = React.useState("");
-  
-  function hiddenError() {
-    setNameInputErrorMessage("");
-    setAboutInputErrorMessage("");
-  }
+  const [nameErrorMessage, setNameErrorMessage] = React.useState("");
+  const [aboutErrorMessage, setAboutErrorMessage] = React.useState("");
 
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-    hiddenError();
+    setNameErrorMessage("");
+    setAboutErrorMessage("");
   }, [currentUser, isOpen]);
-
-  
 
   function handleChangeName(e) {
     setName(e.target.value);
     //валидация
     if (e.target.value.length < 2) {
-      setNameInputErrorMessage(e.target.validationMessage);
+      setNameErrorMessage(e.target.validationMessage);
     } else {
-      setNameInputErrorMessage("");
+      setNameErrorMessage("");
     }
   }
 
@@ -38,9 +32,9 @@ export function EditProfilePopup({ isOpen, onClose, onUpdateUser, onLoading }) {
     setDescription(e.target.value);
     //валидация
     if (e.target.value.length < 2) {
-      setAboutInputErrorMessage(e.target.validationMessage);
+      setAboutErrorMessage(e.target.validationMessage);
     } else {
-      setAboutInputErrorMessage("");
+      setAboutErrorMessage("");
     }
   }
   function handleSubmit(e) {
@@ -62,7 +56,9 @@ export function EditProfilePopup({ isOpen, onClose, onUpdateUser, onLoading }) {
     >
       <div className="form__section">
         <input
-          className={`form__input form__input_type_name ${nameInputErrorMessage && "form__input_invalid"}`}
+          className={`form__input form__input_type_name ${
+            nameErrorMessage && "form__input_invalid"
+          }`}
           id="name"
           type="text"
           name="name"
@@ -73,15 +69,17 @@ export function EditProfilePopup({ isOpen, onClose, onUpdateUser, onLoading }) {
           value={name}
           onChange={handleChangeName}
         />
-        {nameInputErrorMessage && (
+        {nameErrorMessage && (
           <span className="form__input-error_active" id="name-error">
-            {nameInputErrorMessage}
+            {nameErrorMessage}
           </span>
         )}
       </div>
       <div className="form__section">
         <input
-          className={`form__input form__input_type_career ${aboutInputErrorMessage && "form__input_invalid"}`}
+          className={`form__input form__input_type_career ${
+            aboutErrorMessage && "form__input_invalid"
+          }`}
           id="about"
           type="text"
           name="about"
@@ -92,9 +90,9 @@ export function EditProfilePopup({ isOpen, onClose, onUpdateUser, onLoading }) {
           value={description}
           onChange={handleChangeDescription}
         />
-        {aboutInputErrorMessage && (
+        {aboutErrorMessage && (
           <span className="form__input-error_active" id="about-error">
-            {aboutInputErrorMessage}
+            {aboutErrorMessage}
           </span>
         )}
       </div>

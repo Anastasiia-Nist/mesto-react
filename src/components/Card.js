@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { CurrentUserContext } from "../context/CurrentUserContext";
 
-function Card({ card, onCardClick, onCardLike, onCardDelete }) {
+function Card({ card, onCardClick, onCardLike, onConfirmationDelete}) {
   const currentUser = useContext(CurrentUserContext);
   const isOwn = card.owner._id === currentUser._id;
   const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -18,8 +18,8 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   function handleLikeClick() {
     onCardLike(card);
   }
-  function handleDeleteClick() {
-    onCardDelete(card);
+  function handleTrashClick() {
+    onConfirmationDelete(card);
   }
   return (
     <article className="card">
@@ -43,7 +43,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
       {isOwn && (
         <button
           className={cardDeleteButtonClassName}
-          onClick={handleDeleteClick}
+          onClick={handleTrashClick}
           aria-label="Кнопка удаления карточки"
         />
       )}
