@@ -1,5 +1,5 @@
 import React from "react";
-import {usePopupClose} from "./usePopupClose";
+import {usePopupClose} from "../hooks/usePopupClose";
 import PopupWithForm from "./PopupWithForm";
 
 export function ConfirmationPopup({card, isOpen, onClose, onLoading, onDelete}) {
